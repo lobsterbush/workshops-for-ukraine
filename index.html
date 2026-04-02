@@ -391,24 +391,25 @@
     .timer-slide::before, .timer-slide::after { display: none !important; }
 
     .timer {
-      font-size: 8em;
-      font-weight: 600;
+      font-size: 3.5em;
+      font-weight: 500;
       line-height: 1;
-      color: #fff !important;
-      background: var(--accent);
+      color: var(--text-muted) !important;
+      background: transparent;
+      border: 2px solid var(--border);
       cursor: pointer;
       user-select: none;
       transition: all 0.3s ease;
       font-variant-numeric: tabular-nums;
-      padding: 0.35em 0.7em;
-      border-radius: 20px;
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 0.3em 0.6em;
+      border-radius: 12px;
       display: inline-block;
-      box-shadow: 0 10px 40px rgba(0, 87, 184, 0.35);
     }
-    .timer:hover { transform: scale(1.02); box-shadow: 0 14px 50px rgba(0, 87, 184, 0.45); }
-    .timer.running { background: var(--accent); color: #fff !important; }
-    .timer.warning { background: #e6a817; color: #fff !important; box-shadow: 0 10px 40px rgba(230, 168, 23, 0.35); }
-    .timer.expired { background: #e85555; color: #fff !important; animation: pulse 1s ease-in-out infinite; box-shadow: 0 10px 40px rgba(232, 85, 85, 0.35); }
+    .timer:hover { border-color: var(--accent); color: var(--accent) !important; }
+    .timer.running { border-color: var(--accent); color: var(--accent) !important; background: rgba(0, 87, 184, 0.06); }
+    .timer.warning { border-color: #e6a817; color: #e6a817 !important; background: rgba(230, 168, 23, 0.06); }
+    .timer.expired { border-color: #e85555; color: #e85555 !important; animation: pulse 1s ease-in-out infinite; background: rgba(232, 85, 85, 0.06); }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.7; }
@@ -538,9 +539,9 @@
     <div class="card fragment" style="border-top: 4px solid var(--accent);">
       <h3 style="color: var(--accent); margin-bottom: 0.5em;">Agentic coding</h3>
       <ul style="font-size: 0.95em;">
-        <li><strong>Constrain</strong> the agent with rules</li>
+        <li><strong>Constrain</strong> the agent with your rules</li>
         <li><strong>Verify</strong> every output</li>
-        <li>Numbered scripts, robust SEs, no absolute paths</li>
+        <li>Your conventions, enforced consistently</li>
         <li>A second agent <strong>audits</strong> the first</li>
         <li>Paper trail writes itself</li>
       </ul>
@@ -629,7 +630,7 @@
   <p>The agent handles execution. You handle direction.</p>
   <ul style="margin-top: 0.8em;">
     <li class="fragment"><strong>Decompose</strong> — break a vague research task into numbered, concrete steps</li>
-    <li class="fragment"><strong>Constrain</strong> — specify packages (<code>estimatr</code>), SE type (HC2), file format (RDS), plot style (<code>theme_tufte</code>)</li>
+    <li class="fragment"><strong>Constrain</strong> — specify your preferred packages, SE type, file format, plot style</li>
     <li class="fragment"><strong>Verify</strong> — check every output before moving on</li>
   </ul>
   <div class="callout fragment" style="margin-top: 1em;">
@@ -651,41 +652,37 @@ demographics, loss aversion, and an immigration conjoint.
 
 1. Clean the data — build a populism index from pop_1.n
    through pop_6.n, recode demographics, handle NAs
-2. Run descriptive stats by country
-3. Model predictors of populism (age, ed_postsec,
-   income, globalization attitudes, loss aversion)
-   using lm_robust() with HC2 SEs
-4. Coefficient plot (ggplot + theme_tufte, cairo_pdf)
-5. Export all statistics as LaTeX macros
+2. Explore: descriptive stats by country, distributions
+3. Model predictors of populism (age, education,
+   globalization attitudes, loss aversion)
+4. Publication-ready coefficient plot
+5. Export all statistics to a file I can reference
+   in the paper without retyping numbers
 6. Robustness: country fixed effects
 7. Put in numbered .R scripts
 
-Use here::here(). No absolute paths."</span>
+No absolute paths."</span>
   </div>
 </section>
 
-<!-- DEMO PROMPT: THE OUTPUT -->
-<section class="dark">
-  <div class="dark-content">
-    <p class="label">R Example — What the Agent Produces</p>
-    <h2>Seven files, one prompt</h2>
-    <pre class="file-tree" style="font-size: 0.75em;">
-<span class="file-name">populism-reanalysis/</span>
-├── <span class="file-name">01_clean_data.R</span>      <span class="file-desc">— read CSV, build populism index, recode, write RDS</span>
-├── <span class="file-name">02_eda.R</span>              <span class="file-desc">— summary stats by country, missingness, distributions</span>
-├── <span class="file-name">03_analysis.R</span>         <span class="file-desc">— lm_robust(pop ~ ...), extract coefs, statistics.tex</span>
-├── <span class="file-name">04_figures.R</span>          <span class="file-desc">— coefficient plot, ggsave(cairo_pdf, 6.5" × 4.5")</span>
-├── <span class="file-name">05_robustness.R</span>       <span class="file-desc">— country FE, alternative populism operationalizations</span>
-├── <span class="file-name">output/</span>
-│   ├── <span class="file-name">statistics.tex</span>    <span class="file-desc">— LaTeX macros for every reported number</span>
-│   └── <span class="file-name">tables/</span>           <span class="file-desc">— modelsummary regression tables</span>
-├── <span class="file-name">figures/</span>
-│   ├── <span class="file-name">coef_plot.pdf</span>     <span class="file-desc">— publication-ready</span>
-│   └── <span class="file-name">coef_plot.png</span>     <span class="file-desc">— 300 DPI backup</span>
-└── <span class="file-name">README.md</span>             <span class="file-desc">— replication instructions</span>
+<!-- WHAT THE AGENT PRODUCES -->
+<section>
+  <p class="label">R Example — What the Agent Produces</p>
+  <h2>From one prompt: a full project directory</h2>
+  <ul style="margin-top: 0.8em;">
+    <li class="fragment"><strong>Cleaning script</strong> — reads raw data, recodes, handles missingness, writes analysis-ready file</li>
+    <li class="fragment"><strong>Exploration script</strong> — distributions, missingness, sample sizes by country</li>
+    <li class="fragment"><strong>Analysis script</strong> — models, extracts coefficients, exports statistics</li>
+    <li class="fragment"><strong>Figures script</strong> — publication-ready plots, exported to PDF and PNG</li>
+    <li class="fragment"><strong>Statistics file</strong> — every number computed, not typed — your paper references it directly</li>
+    <li class="fragment"><strong>README</strong> — replication instructions</li>
+  </ul>
+  <div class="callout fragment" style="margin-top: 1em;">
+    <p>Let me open the project directory and show you what’s inside each file.</p>
   </div>
 </section>
 
+<!-- ============================================================ -->
 <!-- ============================================================ -->
 <!-- PART 2: INSIDE THE CODE -->
 <!-- ============================================================ -->
@@ -693,7 +690,6 @@ Use here::here(). No absolute paths."</span>
   <div class="section-content">
     <p class="label">Part 2</p>
     <h1>Inside the Code</h1>
-    <p>Walking through what the agent actually produces</p>
   </div>
 </section>
 
@@ -713,144 +709,78 @@ Use here::here(). No absolute paths."</span>
       </ul>
     </div>
     <div>
-      <h3 style="color: var(--gold-dark);">Rules you enforce</h3>
+      <h3 style="color: var(--gold-dark);">Your rules — whatever you want</h3>
       <ul>
-        <li><code>here::here()</code> for all paths</li>
-        <li>Robust SEs by default</li>
-        <li><code>theme_tufte()</code> for all plots</li>
+        <li>Your preferred SE type</li>
+        <li>Your preferred plot style</li>
+        <li>Output format (PDF, PNG, both)</li>
         <li>Sequential script numbering</li>
-        <li>LaTeX macros for all stats</li>
+        <li>How to export statistics</li>
       </ul>
     </div>
   </div>
   <div class="callout fragment" style="margin-top: 1em;">
-    <p>These rules become the <strong>builder skill</strong> we'll see later. For now, notice: the agent follows whatever conventions you write down.</p>
+    <p>These rules become the <strong>conventions file</strong> that the builder skill reads. Different users, different conventions, same process.</p>
   </div>
 </section>
 
-<!-- R CODE: 01_clean_data.R -->
+<!-- WHAT TO LOOK FOR -->
+<section>
+  <p class="label">What to Look For</p>
+  <h2>When I open these files, check for:</h2>
+  <ul style="margin-top: 0.8em;">
+    <li class="fragment"><strong>Relative paths only</strong> — no <code>/Users/crabtree/...</code> anywhere</li>
+    <li class="fragment"><strong>Dropped rows are logged</strong> — "Raw rows: 82,034 | Clean rows: 71,847 | Dropped: 10,187"</li>
+    <li class="fragment"><strong>Statistics are computed, not typed</strong> — every number flows from code to paper</li>
+    <li class="fragment"><strong>Scripts have clear headers</strong> — purpose, inputs, outputs</li>
+    <li class="fragment"><strong>Figures match the regression table</strong> — same model, same sample, same coefficients</li>
+  </ul>
+  <div class="callout-gold callout fragment" style="margin-top: 1em;">
+    <p>These are the things a reviewer agent checks automatically. Let me show you the code.</p>
+  </div>
+</section>
+<!-- STATISTICS.TEX PATTERN -->
 <section class="dark">
   <div class="dark-content">
-    <p class="label">Walkthrough — 01_clean_data.R</p>
-    <pre style="font-size: 0.62em;">
-<span class="r-comment"># ==============================================================================</span>
-<span class="r-comment"># 01_clean_data.R</span>
-<span class="r-comment"># Purpose: Load and clean raw survey data</span>
-<span class="r-comment"># Input:   data/raw/survey_2024.csv</span>
-<span class="r-comment"># Output:  data/processed/survey_clean.rds</span>
-<span class="r-comment"># ==============================================================================</span>
-
-<span class="r-func">library</span>(here)
-<span class="r-func">library</span>(tidyverse)
-
-raw <span class="r-assign">&lt;-</span> <span class="r-func">read_csv</span>(<span class="r-func">here</span>(<span class="r-string">"data"</span>, <span class="r-string">"raw"</span>, <span class="r-string">"processed.csv"</span>),
-                 skip <span class="r-assign">=</span> <span class="r-num">2</span>)  <span class="r-comment"># skip Qualtrics metadata rows</span>
-
-<span class="r-func">cat</span>(<span class="r-string">"Raw rows:"</span>, <span class="r-func">nrow</span>(raw), <span class="r-string">"\n"</span>)
-
-clean <span class="r-assign">&lt;-</span> raw |&gt;
-  <span class="r-func">mutate</span>(
-    pop_index <span class="r-assign">=</span> <span class="r-func">rowMeans</span>(<span class="r-func">across</span>(pop_1.n:pop_6.n), na.rm <span class="r-assign">=</span> TRUE),
-    age       <span class="r-assign">=</span> <span class="r-func">as.numeric</span>(age),
-    country   <span class="r-assign">=</span> <span class="r-func">factor</span>(country)
-  ) |&gt;
-  <span class="r-func">filter</span>(!<span class="r-func">is.na</span>(pop_index))  <span class="r-comment"># explicit, not na.omit()</span>
-
-<span class="r-func">cat</span>(<span class="r-string">"Clean rows:"</span>, <span class="r-func">nrow</span>(clean), <span class="r-string">"| Dropped:"</span>,
-    <span class="r-func">nrow</span>(raw) - <span class="r-func">nrow</span>(clean), <span class="r-string">"\n"</span>)
-
-<span class="r-func">saveRDS</span>(clean, <span class="r-func">here</span>(<span class="r-string">"data"</span>, <span class="r-string">"processed"</span>, <span class="r-string">"populism_clean.rds"</span>))
+    <p class="label">The Key Pattern — Never Hardcode a Number</p>
+    <h2>Statistics flow from code to paper</h2>
+    <div class="cols" style="gap: 30px;">
+      <div>
+        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">The agent computes and exports:</p>
+        <pre style="font-size: 0.6em; margin: 0;">
+<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\nObs</span>}{<span class="tex-arg">72,814</span>}
+<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainCoef</span>}{<span class="tex-arg">0.342</span>}
+<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainSE</span>}{<span class="tex-arg">0.012</span>}
+<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainP</span>}{<span class="tex-arg">0.001</span>}
+<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\rSquared</span>}{<span class="tex-arg">0.241</span>}</pre>
+      </div>
+      <div>
+        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">You write in your paper:</p>
+        <pre style="font-size: 0.6em; margin: 0;">
+Our sample includes <span class="tex-cmd">\nObs</span>{} respondents.
+The main effect is
+$\beta = <span class="tex-cmd">\mainCoef</span>{}$
+(SE $= <span class="tex-cmd">\mainSE</span>{}$,
+$p = <span class="tex-cmd">\mainP</span>{}$).</pre>
+      </div>
+    </div>
+    <div class="callout-gold callout" style="margin-top: 1.2em;">
+      <p>Re-run analysis → file updates → paper updates. Zero transcription errors. This works with LaTeX macros, CSV, JSON — whatever your workflow uses.</p>
+    </div>
   </div>
 </section>
 
-<!-- R CODE: 03_analysis.R -->
-<section class="dark">
-  <div class="dark-content">
-    <p class="label">Walkthrough — 03_analysis.R</p>
-    <pre style="font-size: 0.62em;">
-<span class="r-comment"># ==============================================================================</span>
-<span class="r-comment"># 03_analysis.R</span>
-<span class="r-comment"># Purpose: Estimate main models, export coefficients as LaTeX macros</span>
-<span class="r-comment"># Input:   data/processed/survey_clean.rds</span>
-<span class="r-comment"># Output:  output/statistics.tex, output/tables/main_models.tex</span>
-<span class="r-comment"># ==============================================================================</span>
-
-<span class="r-func">library</span>(here)
-<span class="r-func">library</span>(estimatr)
-<span class="r-func">library</span>(modelsummary)
-
-df <span class="r-assign">&lt;-</span> <span class="r-func">readRDS</span>(<span class="r-func">here</span>(<span class="r-string">"data"</span>, <span class="r-string">"processed"</span>, <span class="r-string">"populism_clean.rds"</span>))
-
-<span class="r-comment"># Main model — robust (HC2) standard errors</span>
-m1 <span class="r-assign">&lt;-</span> <span class="r-func">lm_robust</span>(pop_index ~ age + ed_postsec +
-                            globalization_country.n +
-                            rwa.n + loss_1.n,
-               data <span class="r-assign">=</span> df, se_type <span class="r-assign">=</span> <span class="r-string">"HC2"</span>)
-
-<span class="r-comment"># Export ALL statistics as LaTeX macros — never hardcode</span>
-<span class="r-func">sink</span>(<span class="r-func">here</span>(<span class="r-string">"output"</span>, <span class="r-string">"statistics.tex"</span>))
-<span class="r-func">cat</span>(<span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\nObs}{%s}\n"</span>,
-           <span class="r-func">format</span>(<span class="r-func">nobs</span>(m1), big.mark <span class="r-assign">=</span> <span class="r-string">","</span>)))
-<span class="r-func">cat</span>(<span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\mainCoef}{%.3f}\n"</span>, <span class="r-func">coef</span>(m1)[<span class="r-string">"rwa.n"</span>]))
-<span class="r-func">cat</span>(<span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\mainSE}{%.3f}\n"</span>,   m1$std.error[<span class="r-string">"rwa.n"</span>]))
-<span class="r-func">cat</span>(<span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\mainP}{%.3f}\n"</span>,    m1$p.value[<span class="r-string">"rwa.n"</span>]))
-<span class="r-func">cat</span>(<span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\rSquared}{%.3f}\n"</span>,  <span class="r-func">summary</span>(m1)$r.squared))
-<span class="r-func">sink</span>()
-  </div>
-</section>
-
-<!-- R CODE: 04_figures.R -->
-<section class="dark">
-  <div class="dark-content">
-    <p class="label">Walkthrough — 04_figures.R</p>
-    <pre style="font-size: 0.62em;">
-<span class="r-comment"># ==============================================================================</span>
-<span class="r-comment"># 04_figures.R</span>
-<span class="r-comment"># Purpose: Publication-ready coefficient plot</span>
-<span class="r-comment"># Input:   data/processed/survey_clean.rds</span>
-<span class="r-comment"># Output:  figures/coef_plot.pdf, figures/coef_plot.png</span>
-<span class="r-comment"># ==============================================================================</span>
-
-<span class="r-func">library</span>(here)
-<span class="r-func">library</span>(estimatr)
-<span class="r-func">library</span>(ggplot2)
-<span class="r-func">library</span>(ggthemes)
-<span class="r-func">library</span>(broom)
-
-df <span class="r-assign">&lt;-</span> <span class="r-func">readRDS</span>(<span class="r-func">here</span>(<span class="r-string">"data"</span>, <span class="r-string">"processed"</span>, <span class="r-string">"populism_clean.rds"</span>))
-
-m1 <span class="r-assign">&lt;-</span> <span class="r-func">lm_robust</span>(pop_index ~ age + ed_postsec +
-                            globalization_country.n +
-                            rwa.n + loss_1.n,
-               data <span class="r-assign">=</span> df, se_type <span class="r-assign">=</span> <span class="r-string">"HC2"</span>)
-
-p <span class="r-assign">&lt;-</span> <span class="r-func">tidy</span>(m1) |&gt;
-  <span class="r-func">filter</span>(term != <span class="r-string">"(Intercept)"</span>) |&gt;
-  <span class="r-func">ggplot</span>(<span class="r-func">aes</span>(x <span class="r-assign">=</span> estimate, y <span class="r-assign">=</span> <span class="r-func">reorder</span>(term, estimate))) +
-  <span class="r-func">geom_vline</span>(xintercept <span class="r-assign">=</span> <span class="r-num">0</span>, linetype <span class="r-assign">=</span> <span class="r-string">"dashed"</span>, color <span class="r-assign">=</span> <span class="r-string">"grey60"</span>) +
-  <span class="r-func">geom_pointrange</span>(<span class="r-func">aes</span>(xmin <span class="r-assign">=</span> conf.low, xmax <span class="r-assign">=</span> conf.high), size <span class="r-assign">=</span> <span class="r-num">0.8</span>) +
-  <span class="r-func">labs</span>(x <span class="r-assign">=</span> <span class="r-string">"Coefficient estimate (95% CI)"</span>, y <span class="r-assign">=</span> NULL) +
-  <span class="r-func">theme_tufte</span>(base_size <span class="r-assign">=</span> <span class="r-num">14</span>)
-
-<span class="r-func">ggsave</span>(<span class="r-func">here</span>(<span class="r-string">"figures"</span>, <span class="r-string">"coef_plot.pdf"</span>),
-       plot <span class="r-assign">=</span> p, device <span class="r-assign">=</span> cairo_pdf, width <span class="r-assign">=</span> <span class="r-num">6.5</span>, height <span class="r-assign">=</span> <span class="r-num">4.5</span>)
-<span class="r-func">ggsave</span>(<span class="r-func">here</span>(<span class="r-string">"figures"</span>, <span class="r-string">"coef_plot.png"</span>),
-       plot <span class="r-assign">=</span> p, width <span class="r-assign">=</span> <span class="r-num">6.5</span>, height <span class="r-assign">=</span> <span class="r-num">4.5</span>, dpi <span class="r-assign">=</span> <span class="r-num">300</span>)</pre>
-  </div>
-</section>
-
-<!-- AUDIT TRAIL — woven into walkthrough -->
+<!-- PAPER TRAIL -->
 <section>
   <p class="label">The Paper Trail</p>
   <h2>Documentation happens automatically</h2>
-  <p>You've now seen five files the agent wrote. But there's a sixth layer you get for free.</p>
   <ul style="margin-top: 0.8em;">
     <li class="fragment"><strong>Session logs</strong> — every prompt, command, and output is recorded</li>
-    <li class="fragment"><strong>Model tracked</strong> — which LLM (Sonnet, Opus, GPT-4o) produced each result</li>
-    <li class="fragment"><strong>Git integration</strong> — commits + session logs = complete provenance chain</li>
+    <li class="fragment"><strong>Model tracked</strong> — which LLM produced each result</li>
+    <li class="fragment"><strong>Git integration</strong> — commits + session logs = provenance chain</li>
   </ul>
   <div class="callout fragment" style="margin-top: 1em;">
-    <p>Session logs + numbered scripts + statistics.tex + git = a replication package that writes itself.</p>
+    <p>Numbered scripts + computed statistics + session logs + git = a replication package that writes itself.</p>
   </div>
 </section>
 
@@ -864,54 +794,30 @@ p <span class="r-assign">&lt;-</span> <span class="r-func">tidy</span>(m1) |&gt;
   </div>
 </section>
 
-<!-- WHAT AGENTS GET WRONG -->
+<!-- SINGLE CONSOLIDATED FAILURE SLIDE -->
 <section>
-  <p class="label">Caution</p>
-  <h2>What agents get wrong in R</h2>
-  <p>These are real mistakes I've seen agents make. They present every one with full confidence.</p>
-  <ul style="margin-top: 0.8em;">
-    <li class="fragment"><strong><code>na.omit()</code> without telling you</strong> — silently drops hundreds of rows, changes your N</li>
-    <li class="fragment"><strong>Default <code>lm()</code> standard errors</strong> — should be <code>lm_robust()</code> with HC2 or clustered</li>
-    <li class="fragment"><strong>Absolute paths</strong> — <code>/Users/you/...</code> breaks on every other machine</li>
-    <li class="fragment"><strong>Hardcoded numbers</strong> — types "p < 0.001" in LaTeX when the real p is 0.047</li>
-    <li class="fragment"><strong>Missing <code>set.seed()</code></strong> — bootstrap CIs shift on every run</li>
-    <li class="fragment"><strong>Wrong cluster level</strong> — clusters by respondent when it should cluster by household</li>
-  </ul>
-  <div class="callout fragment" style="margin-top: 1em;">
-    <p>The scary part: these look right at a glance. You need a systematic way to catch them. That's where Part 4 comes in.</p>
+  <p class="label">Real Failures</p>
+  <h2>Things I've seen agents do — with full confidence</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; margin-top: 0.8em; font-size: 0.95em;">
+    <div class="card fragment" style="border-left: 4px solid #e85555;">
+      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Fabricated a citation</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Cited "Smith & Jones (2019)" in the literature review. Paper doesn’t exist. DOI leads nowhere. Sounded perfectly plausible.</p>
+    </div>
+    <div class="card fragment" style="border-left: 4px solid #e85555;">
+      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> N doesn’t match</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Abstract says N = 1,247. Results table says N = 935. Cleaning script silently dropped 312 rows. No mention anywhere.</p>
+    </div>
+    <div class="card fragment" style="border-left: 4px solid #e85555;">
+      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Figure doesn’t match table</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Coefficient plot shows β = 0.34. Regression table says 0.21. Agent re-estimated the model with a different sample for the figure.</p>
+    </div>
+    <div class="card fragment" style="border-left: 4px solid #e6a817;">
+      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-warning">🟡</span> Variables theory never mentioned</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Model has 8 predictors. Theory section discusses 4. The other 4 were added by the agent because they "seemed relevant."</p>
+    </div>
   </div>
-</section>
-
-<!-- R CODE: statistics.tex -->
-<section class="dark">
-  <div class="dark-content">
-    <p class="label">statistics.tex — The LaTeX Macro Pattern</p>
-    <h2>Never hardcode a number</h2>
-    <div class="cols" style="gap: 30px;">
-      <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">What the agent writes:</p>
-        <pre style="font-size: 0.6em; margin: 0;">
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\nObs</span>}{<span class="tex-arg">72,814</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainCoef</span>}{<span class="tex-arg">0.342</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainSE</span>}{<span class="tex-arg">0.012</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainP</span>}{<span class="tex-arg">0.001</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\rSquared</span>}{<span class="tex-arg">0.241</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\nCountries</span>}{<span class="tex-arg">4</span>}
-      </div>
-      <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">What you write in your paper:</p>
-        <pre style="font-size: 0.6em; margin: 0;">
-Our sample includes <span class="tex-cmd">\nObs</span>{} respondents
-across <span class="tex-cmd">\nCountries</span>{} countries. The main
-effect of RWA on populist attitudes is
-$\beta = <span class="tex-cmd">\mainCoef</span>{}$ (SE $= <span class="tex-cmd">\mainSE</span>{}$,
-$p = <span class="tex-cmd">\mainP</span>{}$). The model explains
-<span class="tex-cmd">\rSquared</span>{} of the variance.
-      </div>
-    </div>
-    <div class="callout-gold callout" style="margin-top: 1.2em;">
-      <p>Re-run the analysis → statistics.tex updates → paper updates automatically. Zero manual transcription errors.</p>
-    </div>
+  <div class="callout fragment" style="margin-top: 1em;">
+    <p>Every one of these looks right at a glance. You need a systematic way to catch them.</p>
   </div>
 </section>
 
@@ -991,67 +897,20 @@ $p = <span class="tex-cmd">\mainP</span>{}$). The model explains
   </div>
 </section>
 
-<!-- PYTHON AUDIT SCRIPT -->
-<section class="dark">
-  <div class="dark-content">
-    <p class="label">Walkthrough — audit_analysis.py (written by the reviewer agent in Python)</p>
-    <pre style="font-size: 0.58em;">
-<span class="py-string">"""Audit R analysis pipeline — run by reviewer agent."""</span>
-<span class="py-keyword">import</span> <span class="py-import">subprocess</span>, <span class="py-import">re</span>
-<span class="py-keyword">from</span> <span class="py-import">pathlib</span> <span class="py-keyword">import</span> Path
-<span class="py-keyword">import</span> <span class="py-import">pandas</span> <span class="py-keyword">as</span> pd
-<span class="py-keyword">import</span> <span class="py-import">statsmodels.api</span> <span class="py-keyword">as</span> sm
-
-<span class="r-comment"># 1. Run every .R script and capture errors</span>
-<span class="py-keyword">for</span> script <span class="py-keyword">in</span> <span class="py-func">sorted</span>(Path(<span class="py-string">"."</span>).glob(<span class="py-string">"*.R"</span>)):
-    result = subprocess.<span class="py-func">run</span>([<span class="py-string">"Rscript"</span>, <span class="py-string">"--vanilla"</span>, <span class="py-func">str</span>(script)],
-                             capture_output=<span class="py-keyword">True</span>, text=<span class="py-keyword">True</span>)
-    status = <span class="py-string">"PASS"</span> <span class="py-keyword">if</span> result.returncode == <span class="r-num">0</span> <span class="py-keyword">else</span> <span class="py-string">"FAIL"</span>
-    <span class="py-func">print</span>(<span class="py-string">f"</span>{status}: {script.name}<span class="py-string">"</span>)
-
-<span class="r-comment"># 2. Cross-check N against statistics.tex</span>
-df = pd.<span class="py-func">read_csv</span>(<span class="py-string">"data/processed/populism_clean.csv"</span>)
-<span class="py-keyword">with</span> <span class="py-func">open</span>(<span class="py-string">"output/statistics.tex"</span>) <span class="py-keyword">as</span> f:
-    tex = f.<span class="py-func">read</span>()
-reported_n = <span class="py-func">int</span>(re.<span class="py-func">search</span>(<span class="py-string">r"\\nObs\}\{([\d,]+)\}"</span>, tex).<span class="py-func">group</span>(<span class="r-num">1</span>).replace(<span class="py-string">","</span>, <span class="py-string">""</span>))
-<span class="py-keyword">assert</span> <span class="py-func">len</span>(df) == reported_n, \
-    <span class="py-string">f"ROW COUNT MISMATCH: data has </span>{<span class="py-func">len</span>(df)}<span class="py-string">, stats.tex reports </span>{reported_n}<span class="py-string">"</span>
-
-<span class="r-comment"># 3. Re-estimate key coefficient with statsmodels</span>
-X = sm.<span class="py-func">add_constant</span>(df[[<span class="py-string">"age"</span>, <span class="py-string">"ed_postsec"</span>, <span class="py-string">"rwa_n"</span>]])
-y = df[<span class="py-string">"pop_index"</span>]
-model = sm.<span class="py-func">OLS</span>(y, X).<span class="py-func">fit</span>(cov_type=<span class="py-string">"HC2"</span>)
-
-r_coef = <span class="py-func">float</span>(re.<span class="py-func">search</span>(<span class="py-string">r"\\mainCoef\}\{([\d.]+)\}"</span>, tex).<span class="py-func">group</span>(<span class="r-num">1</span>))
-py_coef = model.params[<span class="py-string">"rwa_n"</span>]
-<span class="py-keyword">assert</span> <span class="py-func">abs</span>(r_coef - py_coef) < <span class="r-num">0.01</span>, \
-    <span class="py-string">f"COEFFICIENT MISMATCH: R=</span>{r_coef}<span class="py-string">, Python=</span>{py_coef:.4f}<span class="py-string">"</span>
-
-<span class="py-func">print</span>(<span class="py-string">"All checks passed."</span>)</pre>
-  </div>
-</section>
-
-<!-- CONCRETE CATCHES -->
+<!-- WHAT THE REVIEWER DOES -->
 <section>
-  <p class="label">What the Reviewer Catches</p>
-  <h2>Real examples of silent failures</h2>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; margin-top: 0.8em; font-size: 0.95em;">
-    <div class="card fragment" style="border-left: 4px solid #e85555;">
-      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Dropped 312 observations</h3>
-      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Builder used <code>na.omit()</code> silently. Reviewer's Python check: <code>pd.read_csv().shape[0]</code> ≠ reported N in statistics.tex</p>
-    </div>
-    <div class="card fragment" style="border-left: 4px solid #e85555;">
-      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Wrong cluster level</h3>
-      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Clustered by <code>respondent_id</code> but data has multiple respondents per household. Reviewer checked with <code>groupby('household_id')['respondent_id'].nunique()</code></p>
-    </div>
-    <div class="card fragment" style="border-left: 4px solid #e85555;">
-      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Hardcoded p-value</h3>
-      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Builder wrote <code>p &lt; 0.001</code> in LaTeX but actual p = 0.047. Reviewer's statsmodels re-estimation caught the discrepancy.</p>
-    </div>
-    <div class="card fragment" style="border-left: 4px solid #e6a817;">
-      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-warning">🟡</span> Missing set.seed()</h3>
-      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Results changed on re-run. Reviewer ran the pipeline twice and diffed outputs — bootstrap CIs shifted.</p>
-    </div>
+  <p class="label">The Reviewer Agent</p>
+  <h2>What <code>/reviewer-agent</code> does</h2>
+  <p>You switch to a different model, invoke the reviewer, and it:</p>
+  <ul style="margin-top: 0.8em;">
+    <li class="fragment"><strong>Runs every script from a clean session</strong> — do they all succeed?</li>
+    <li class="fragment"><strong>Checks that N matches</strong> — counts rows in the actual data, compares to reported N</li>
+    <li class="fragment"><strong>Checks figures against tables</strong> — are the coefficients the same?</li>
+    <li class="fragment"><strong>Searches for hardcoded numbers</strong> — are statistics computed or typed?</li>
+    <li class="fragment"><strong>Writes a review report</strong> — Critical / Warning / Note, with specific fixes</li>
+  </ul>
+  <div class="callout-gold callout fragment" style="margin-top: 1em;">
+    <p>Let me show you what this looks like live.</p>
   </div>
 </section>
 
@@ -1075,55 +934,57 @@ py_coef = model.params[<span class="py-string">"rwa_n"</span>]
 <!-- EXERCISE CARDS -->
 <section>
   <p class="label">Exercises</p>
-  <h2>Three exercises to try</h2>
-  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5em; margin-top: 0.8em; font-size: 0.95em;">
+  <h2>Four exercises — pick your level</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; margin-top: 0.8em; font-size: 0.95em;">
+    <div class="card" style="border-left: 4px solid var(--text-muted);">
+      <h3 style="font-size: 1.05em; color: var(--text-muted); margin-bottom: 0.5em;">1. Just Talk to It</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">No skills, no setup. Just type.</p>
+      <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="c">"Tell me about the files in this folder."
+
+"I have survey data at data/raw/processed.csv.
+What’s in it? How many rows? What countries?"
+
+"Put together a plan for analyzing whether
+economic insecurity predicts populist attitudes."</span></pre>
+    </div>
     <div class="card" style="border-left: 4px solid var(--accent);">
-      <h3 style="font-size: 1.05em; color: var(--accent); margin-bottom: 0.5em;">1. Build</h3>
-      <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 0.8em;">Use the builder skill</p>
-      <pre style="font-size: 0.65em; padding: 14px; margin: 0;">
-<span class="c">"Dataset at [PATH].
-
-1. Clean and write RDS
-2. Run lm_robust() with HC2 SEs
-3. Coefficient plot (theme_tufte)
-4. Export stats as LaTeX macros
-5. Put in numbered .R scripts
-
-Use here::here(). No absolute paths."</span></pre>
+      <h3 style="font-size: 1.05em; color: var(--accent); margin-bottom: 0.5em;">2. Use the Builder</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">Same question, structured workflow.</p>
+      <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="p">/builder-agent</span>
+<span class="c">"Does economic insecurity predict populist
+attitudes? Use data/raw/processed.csv (~82K rows).
+• DV: populism index (pop_1.n through pop_6.n)
+• Key IVs: loss aversion (loss_1.n–loss_6.n)
+• Controls: age, education (ed_postsec), country
+• Explore first, then model, then visualize"</span></pre>
     </div>
     <div class="card" style="border-left: 4px solid var(--gold-dark);">
-      <h3 style="font-size: 1.05em; color: var(--gold-dark); margin-bottom: 0.5em;">2. Break</h3>
-      <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 0.8em;">Switch model, use reviewer skill</p>
-      <pre style="font-size: 0.65em; padding: 14px; margin: 0;">
-<span class="c">"Audit the .R scripts in this project.
+      <h3 style="font-size: 1.05em; color: var(--gold-dark); margin-bottom: 0.5em;">3. Break It</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">Switch model, audit the builder’s work.</p>
+      <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="c">1. Review the .R scripts the builder created
+2. Click model selector → switch model</span>
 
-1. Run each from clean session
-2. Check for silent failures
-3. Use Python to verify N and
-   re-estimate key coefficient
-4. Produce review_report.md with
-   severity levels
+<span class="p">/reviewer-agent</span>
+<span class="c">"Audit everything the builder just produced."</span>
 
-Be adversarial. Find problems."</span></pre>
+<span class="c">3. Read review_report.md. What did it find?</span></pre>
     </div>
     <div class="card" style="border-left: 4px solid #A855F7;">
-      <h3 style="font-size: 1.05em; color: #A855F7; margin-bottom: 0.5em;">3. Full Cycle</h3>
-      <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 0.8em;">Build with Claude → Review with GPT</p>
-      <pre style="font-size: 0.65em; padding: 14px; margin: 0;">
-<span class="c">Step 1: /builder-agent on Claude
-  "Analyze data at [PATH]..."
+      <h3 style="font-size: 1.05em; color: #A855F7; margin-bottom: 0.5em;">4. Build Something You Can Use</h3>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">Don’t read the code. <em>Use</em> it.</p>
+      <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="c">"Build a Twitter/X feed interface for a survey
+experiment on [YOUR TOPIC].
+• 8 posts with treatment variation
+• Track likes, retweets, timestamps
+• Embed in Qualtrics via iframe
+• Single HTML file, no dependencies"</span>
 
-Step 2: Switch to GPT-4o
-  /reviewer-agent
-  "Audit everything the builder
-   just produced..."
-
-Step 3: Compare what each catches</span></pre>
+<span class="c">Open it. Like a post. Scroll. Does it work?</span></pre>
     </div>
   </div>
-  <div style="text-align: center; margin-top: 1.2em;">
-    <p style="font-size: 1.4em; color: var(--text); font-weight: 500; margin: 0 0 0.8em 0;">Pick the one that slightly scares you.</p>
+  <div style="text-align: center; margin-top: 1em;">
     <p class="timer" data-minutes="14" style="font-size: 2em;">14:00</p>
+    <p style="font-size: 1em; color: var(--text-muted); margin-top: 0.8em;">Have your own data? Try any of these with your own project.</p>
   </div>
 </section>
 
@@ -1195,7 +1056,7 @@ Step 3: Compare what each catches</span></pre>
   <p class="label">Summary</p>
   <h2>Three things</h2>
   <ol style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Constrain the agent.</strong> Conventions in WARP.md. Numbered scripts. No absolute paths. Robust SEs.</li>
+    <li class="fragment"><strong>Constrain the agent.</strong> Your conventions in WARP.md. Numbered scripts. No absolute paths. Statistics computed, not typed.</li>
     <li class="fragment"><strong>Review adversarially.</strong> A second agent — on a different model — catches what the first misses. Use Python to verify R.</li>
     <li class="fragment"><strong>Document by default.</strong> LaTeX macros, session logs, git commits. The paper trail writes itself.</li>
   </ol>

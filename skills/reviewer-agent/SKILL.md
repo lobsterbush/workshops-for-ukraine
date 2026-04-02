@@ -1,208 +1,72 @@
 ---
 name: reviewer-agent
-description: Adversarial auditor for R analysis code. Use after a builder agent (or human) has produced analysis scripts. Breaks, audits, and improves code by checking for silent failures, verifying statistics, and stress-testing assumptions. Can use Python for independent verification.
+description: Audit R analysis code produced by another agent or human. Checks that scripts run, numbers match, and figures are consistent with tables. Use after a builder agent has produced analysis scripts.
 ---
 
-# Reviewer Agent — Adversarial Code Audit
+# Reviewer Agent — Code Audit
 
-Break, audit, and improve R analysis code produced by another agent or human.
-
-## When to use
-
-Invoke this skill when you need to:
-
-- Audit code written by a builder agent before trusting the results
-- Verify that reported statistics match actual computations
-- Stress-test an analysis pipeline for silent failures
-- Prepare a replication package for submission
-
-## Philosophy
-
-Assume the code is wrong until proven otherwise. Your job is to find errors the builder missed — not to confirm the builder's work. Be adversarial, thorough, and specific.
+Verify systematically. Your job is to find errors the builder may have missed.
 
 ## Procedure
 
 ### 1. Inventory
 
-- List all `.R` scripts in execution order (by numeric prefix)
-- List all input data files and output files
-- Read `README.md` and `WARP.md` for stated intentions
-- Note any `statistics.tex`, figures, or tables the pipeline claims to produce
+- List all scripts in execution order (by numeric prefix)
+- List input data files and expected output files
+- Read README.md and WARP.md for stated intentions
+- Note any statistics files, figures, or tables the pipeline claims to produce
 
-### 2. Clean-room execution
+### 2. Run everything from a clean session
 
-Run every script from a clean R session. Do not carry over objects between scripts.
+Run every script from scratch. Do not carry over objects between scripts.
 
-```bash
-for script in $(ls *.R | sort); do
-  echo "=== Running $script ==="
-  Rscript --vanilla "$script" 2>&1 | tee "logs/${script%.R}.log"
-done
-```
+Record for each script:
+- Did it run without errors?
+- Were there warnings? What did they say?
+- What output files were created?
 
-Record:
-- Exit code (0 = success, nonzero = failure)
-- All warnings and messages
-- Wall-clock time
-- Output files created
+### 3. Core checks (always do these)
 
-### 3. Silent failure checklist
+These are the highest-value checks. Do all of them.
 
-Check every item. Mark each as PASS, FAIL, or N/A.
+**Do the numbers match?**
+- Count the rows in the actual data file. Compare to the N reported in any statistics file, table, or manuscript text. If they differ, explain why.
+- Pick the main coefficient from the regression output. Does it match what's reported in the statistics file and in any figures?
 
-**Data integrity:**
-- [ ] Row count after cleaning matches expectation (no silent drops from `na.omit()`, `drop_na()`, `merge()`, or `filter()`)
-- [ ] Merge operations: check for unmatched rows (`anti_join()` both directions)
-- [ ] Factor levels are explicitly set, not inferred from data order
-- [ ] Character encoding is consistent (UTF-8 throughout)
+**Do the figures match the tables?**
+- If there's a coefficient plot and a regression table, do they show the same estimates? Agents sometimes re-run models with slightly different samples for different outputs.
 
-**Statistical correctness:**
-- [ ] Standard errors are the correct type (robust HC2, or clustered by the right variable)
-- [ ] Clustering level matches the data structure (e.g., respondent vs household vs treatment group)
-- [ ] `set.seed()` is called before any operation involving randomness
-- [ ] No hardcoded statistics — all numbers in `statistics.tex` are computed, not typed
-- [ ] Confidence intervals and p-values are consistent with reported coefficients and SEs
-- [ ] Multiple comparisons are acknowledged if applicable
+**Are there absolute paths?**
+- Search all scripts for `/Users/`, `/home/`, `C:\`. These break on other machines.
 
-**Code hygiene:**
-- [ ] No absolute paths (grep for `/Users/`, `/home/`, `C:\\`)
-- [ ] All `library()` calls at the top of each script
-- [ ] No `setwd()` calls
-- [ ] No `install.packages()` inside scripts (belongs in README)
-- [ ] Package versions are recorded (`sessionInfo()` or `renv::snapshot()`)
+**Are statistics computed or hardcoded?**
+- Check whether numbers in any statistics file or manuscript text are computed from data or typed by hand. Hardcoded numbers are a critical error.
 
-**Reproducibility:**
-- [ ] Scripts run in numbered order without manual intervention
-- [ ] Running the full pipeline twice produces identical output
-- [ ] Figures match the statistics they claim to show
+**Are dropped observations documented?**
+- If the cleaning script filters or removes rows, does it report how many were dropped and why? Silent drops are the most common source of N mismatches.
 
-### 4. Python-assisted verification
+### 4. Extended checks (if time permits)
 
-Use Python as an independent check on R output. Agents are polyglot — use the best tool for each task.
+These are valuable but not always feasible in a single session.
 
-**Run R scripts and capture errors:**
+- **Independent re-estimation:** Pick one key result and re-estimate it using a different tool or language (e.g., Python's statsmodels if the original was in R). If R and the other tool agree, the result is more trustworthy.
+- **Reproducibility:** Run the full pipeline twice. Diff the outputs. If anything changed, there's a missing random seed or a non-deterministic step.
+- **Undocumented drops:** Compare row counts at each stage of the pipeline to identify where observations disappear.
 
-```python
-import subprocess
-from pathlib import Path
+### 5. Write a review report
 
-scripts = sorted(Path(".").glob("*.R"))
-for script in scripts:
-    result = subprocess.run(
-        ["Rscript", "--vanilla", str(script)],
-        capture_output=True, text=True
-    )
-    if result.returncode != 0:
-        print(f"FAIL: {script.name}\n{result.stderr}")
-    else:
-        print(f"PASS: {script.name}")
-```
+Produce `review_report.md` organized by severity:
 
-**Cross-check row counts:**
+**Critical** — Results are wrong or misleading. Must fix. Examples: reported N doesn't match data, coefficient in figure doesn't match table, fabricated citation.
 
-```python
-import pandas as pd
-import re
+**Warning** — Results may be fragile or unclear. Should fix. Examples: undocumented dropped observations, missing random seed, deprecated function.
 
-df = pd.read_csv("data/processed/survey_clean.csv")
-actual_n = len(df)
+**Note** — Style or documentation issues. Nice to fix. Examples: inconsistent naming, missing comments, figure could be clearer.
 
-with open("output/statistics.tex") as f:
-    tex = f.read()
-reported_n = int(re.search(r"\\nObs\}\{([\d,]+)\}", tex).group(1).replace(",", ""))
-
-assert actual_n == reported_n, f"Row count mismatch: data has {actual_n}, stats.tex reports {reported_n}"
-```
-
-**Re-estimate key coefficient independently:**
-
-```python
-import statsmodels.api as sm
-
-df = pd.read_csv("data/processed/survey_clean.csv")
-X = sm.add_constant(df[["treatment", "age", "education"]])
-y = df["outcome"]
-model = sm.OLS(y, X).fit(cov_type="HC2")
-
-r_coef = 0.34   # from statistics.tex
-py_coef = model.params["treatment"]
-
-assert abs(r_coef - py_coef) < 0.01, f"Coefficient mismatch: R={r_coef}, Python={py_coef}"
-```
-
-### 5. Adversarial stress tests
-
-Run these tests to probe robustness. Report results even if everything passes.
-
-**Stability tests:**
-- Shuffle input data row order → re-run pipeline → do results change?
-- Remove a random 10% of observations → do substantive conclusions hold?
-- Swap treatment/control labels → does the code break or silently produce opposite results?
-
-**Edge cases:**
-- What happens if a categorical variable has an empty level?
-- What if a numeric variable is all NA for one subgroup?
-- What if the data file is empty (header only)?
-
-### 6. Produce review report
-
-Write a structured markdown report: `review_report.md`
-
-Organize findings by severity:
-
-**🔴 Critical** — Results are wrong or misleading. Must fix before any use.
-Examples: wrong N reported, coefficient doesn't match, clustered at wrong level.
-
-**🟡 Warning** — Results may be fragile or code has maintainability issues. Should fix.
-Examples: missing set.seed(), results unstable when 10% of data removed, deprecated function.
-
-**🟢 Note** — Minor style or documentation issues. Nice to fix.
-Examples: inconsistent variable naming, missing comments, figure aspect ratio.
-
-**Report structure:**
-
-```markdown
-# Adversarial Review Report
-Date: YYYY-MM-DD
-Reviewer model: [e.g., GPT-4o, Claude Sonnet 4.5]
-Builder model: [if known]
-
-## Summary
-[1-2 sentence overall assessment]
-
-## Critical Issues
-### [Issue title]
-- **File:** 03_analysis.R, line 47
-- **Problem:** [what's wrong]
-- **Evidence:** [how you found it]
-- **Fix:** [specific code change]
-
-## Warnings
-[same format]
-
-## Notes
-[same format]
-
-## Stress Test Results
-[table of tests and outcomes]
-
-## Checklist Results
-[PASS/FAIL for each silent failure check]
-```
-
-## Multi-model strategy
-
-This skill is designed to be invoked on a **different model** than the builder used. Cross-provider disagreement catches blind spots:
-
-- Builder on Claude Sonnet → Reviewer on GPT-4o
-- Builder on GPT-4o → Reviewer on Claude Opus
-- Builder on Claude Sonnet → Reviewer on Gemini 2.5 Pro
-
-Switch models in Warp by clicking the model name in the input bar before invoking `/reviewer-agent`.
+For each finding, state: which file, what the problem is, how you found it, and how to fix it.
 
 ## What to avoid
 
-- Do not rubber-stamp the builder's work. Your value is in finding problems.
 - Do not rewrite the code from scratch. Audit what exists.
-- Do not report only style issues. Prioritize correctness over aesthetics.
-- Do not skip the Python verification step. Independent re-estimation is the strongest check.
+- Do not report only style issues. Prioritize correctness.
+- Do not skip the core checks. They catch the most important errors.
