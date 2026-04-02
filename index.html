@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Agentic Coding for R — Workshops for Ukraine</title>
+  <title>Agentic Coding for R -- Workshops for Ukraine</title>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.5.0/dist/reset.css">
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.5.0/dist/reveal.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -288,7 +288,7 @@
     .accent { color: var(--accent); }
     .gold { color: var(--gold-dark); }
 
-    /* Ukraine highlight — blue to gold gradient text */
+    /* Ukraine highlight -- blue to gold gradient text */
     .ukraine-highlight {
       background: linear-gradient(120deg, var(--accent), var(--gold-dark));
       -webkit-background-clip: text;
@@ -331,7 +331,7 @@
     .section-bg .label { color: rgba(255,255,255,0.7); margin-bottom: 0.4em; }
     .section-bg p { color: rgba(255,255,255,0.85); margin-top: 0.5em; font-size: 1.2em; }
 
-    /* Section fail — dark with red accent */
+    /* Section fail -- dark with red accent */
     .section-fail {
       justify-content: flex-end;
       padding-bottom: 100px !important;
@@ -477,11 +477,11 @@
     <li><strong>Senior Lecturer</strong>, School of Social Sciences, Monash University</li>
     <li><strong>Previously:</strong> Dartmouth (Government), Stanford (APARC), Tokyo Foundation for Policy Research</li>
     <li><strong>Ph.D.</strong>, Political Science, University of Michigan</li>
-    <li class="fragment"><strong>Writing papers about LLMs since January 2021</strong> — ~20 months before ChatGPT</li>
+    <li class="fragment"><strong>Writing papers about LLMs since January 2021</strong> -- ~20 months before ChatGPT</li>
     <li class="fragment">Taught AI workshops at Dartmouth, Essex, UNM, IPSA-NUS, Instats, Statistical Horizons</li>
   </ul>
   <div class="callout fragment" style="margin-top: 1em;">
-    <p><strong>I was a skeptic.</strong> I spent years studying these tools critically. AI agents converted me — not chatbots, not autocomplete, but tools that act on your computer, see results, and iterate.</p>
+    <p><strong>I was a skeptic.</strong> I spent years studying these tools critically. AI agents converted me -- not chatbots, not autocomplete, but tools that act on your computer, see results, and iterate.</p>
   </div>
 </section>
 
@@ -489,7 +489,7 @@
 <!-- COMPUTING HISTORY -->
 <!-- ============================================================ -->
 <section class="era-slide" data-background-image="images/punch_cards.jpg" data-background-size="cover" data-background-position="center">
-  <div class="era-label">Punch Cards<span class="era-year">1950s–1970s</span></div>
+  <div class="era-label">Punch Cards<span class="era-year">1950s-1970s</span></div>
 </section>
 
 <section class="era-slide" data-background-image="images/dos.png" data-background-size="cover" data-background-position="center" data-background-color="#000">
@@ -513,7 +513,7 @@
   <p class="label" style="color: var(--gold);">The Shift</p>
   <h2 style="font-size: 2.8em; line-height: 1.2; margin-bottom: 0.6em; color: #fff;">The new operating system is <span class="ukraine-highlight">language</span></h2>
   <p style="font-size: 1.3em; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 900px;">
-    Every era required learning a different interface — punch cards, command lines, graphical desktops.
+    Every era required learning a different interface -- punch cards, command lines, graphical desktops.
   </p>
   <p class="fragment" style="font-size: 1.5em; color: #fff; line-height: 1.5; margin-top: 1.2em; max-width: 900px;">
     Now you describe what you want in plain language. The machine writes the R code, runs it, and fixes the errors.
@@ -549,7 +549,7 @@
     </div>
   </div>
   <div class="callout-gold callout fragment" style="margin-top: 1em;">
-    <p>This workshop is about the right column. Not prompt tricks — <strong>reliable habits</strong>.</p>
+    <p>This workshop is about the right column. Not prompt tricks -- <strong>reliable habits</strong>.</p>
   </div>
 </section>
 
@@ -558,15 +558,15 @@
   <p class="label">Today</p>
   <h2>What we'll cover</h2>
   <ol style="margin-top: 0.8em;">
-    <li class="fragment"><strong>How agents work</strong> — from tasks to numbered .R scripts</li>
-    <li class="fragment"><strong>Inside the code</strong> — walkthrough of real R scripts the agent writes</li>
-    <li class="fragment"><strong>Where agents fail</strong> — silent errors, wrong assumptions</li>
-    <li class="fragment"><strong>Adversarial agentic coding</strong> — builder + reviewer agents, Python diagnostics</li>
-    <li class="fragment"><strong>Hands-on practice</strong> — build, break, and fix</li>
+    <li class="fragment"><strong>How agents work</strong> -- from tasks to numbered .R scripts</li>
+    <li class="fragment"><strong>Inside the code</strong> -- walkthrough of real R scripts the agent writes</li>
+    <li class="fragment"><strong>Where agents fail</strong> -- silent errors, wrong assumptions</li>
+    <li class="fragment"><strong>Adversarial agentic coding</strong> -- builder + reviewer agents, Python diagnostics</li>
+    <li class="fragment"><strong>Hands-on practice</strong> -- build, break, and fix</li>
     <li class="fragment"><strong>Implications</strong></li>
   </ol>
   <div class="callout-gold callout fragment" style="margin-top: 1em;">
-    <p>You'll leave with <strong>copy-paste skill templates</strong> for a builder agent and a reviewer agent that you can use immediately.</p>
+    <p>You will leave with <strong>downloadable skill templates</strong> for a builder agent and a reviewer agent that you can use immediately.</p>
   </div>
 </section>
 
@@ -612,26 +612,26 @@
   <h2>The agent loop</h2>
   <p>Agents observe each result and decide what to do next.</p>
   <ol style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Observe</strong> — read your files, check what exists</li>
-    <li class="fragment"><strong>Plan</strong> — decide which script to write next</li>
-    <li class="fragment"><strong>Execute</strong> — write the code and run it</li>
-    <li class="fragment"><strong>Check</strong> — did it work? Parse errors, read output</li>
-    <li class="fragment"><strong>Repeat</strong> — fix what broke, move to the next step</li>
+    <li class="fragment"><strong>Observe</strong> -- read your files, check what exists</li>
+    <li class="fragment"><strong>Plan</strong> -- decide which script to write next</li>
+    <li class="fragment"><strong>Execute</strong> -- write the code and run it</li>
+    <li class="fragment"><strong>Check</strong> -- did it work? Parse errors, read output</li>
+    <li class="fragment"><strong>Repeat</strong> -- fix what broke, move to the next step</li>
   </ol>
   <div class="callout fragment" style="margin-top: 1em;">
-    <p>This is why they recover from errors. They see what went wrong and try again — just like you would.</p>
+    <p>This is why they recover from errors. They see what went wrong and try again -- just like you would.</p>
   </div>
 </section>
 
 <!-- DECOMPOSE CONSTRAIN VERIFY -->
 <section>
   <p class="label">Your Job</p>
-  <h2>Decompose → Constrain → Verify</h2>
+  <h2>Decompose -> Constrain -> Verify</h2>
   <p>The agent handles execution. You handle direction.</p>
   <ul style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Decompose</strong> — break a vague research task into numbered, concrete steps</li>
-    <li class="fragment"><strong>Constrain</strong> — specify your preferred packages, SE type, file format, plot style</li>
-    <li class="fragment"><strong>Verify</strong> — check every output before moving on</li>
+    <li class="fragment"><strong>Decompose</strong> -- break a vague research task into numbered, concrete steps</li>
+    <li class="fragment"><strong>Constrain</strong> -- specify your preferred packages, SE type, file format, plot style</li>
+    <li class="fragment"><strong>Verify</strong> -- check every output before moving on</li>
   </ul>
   <div class="callout fragment" style="margin-top: 1em;">
     <p>The prompt is a contract. The more specific you are, the fewer surprises. Let me show you what that looks like.</p>
@@ -641,8 +641,8 @@
 <!-- DEMO PROMPT: THE PROMPT -->
 <section class="dark">
   <div class="dark-content">
-    <p class="label">R Example — The Prompt</p>
-    <h2>One prompt → full analysis pipeline</h2>
+    <p class="label">R Example -- The Prompt</p>
+    <h2>One prompt -> full analysis pipeline</h2>
     <pre style="font-size: 0.65em;">
 <span class="p">$</span> <span class="c">"I have a populism survey dataset at
 data/raw/processed.csv that I haven't touched in years.
@@ -650,7 +650,7 @@ It has ~82K rows across multiple countries with pop_1
 through pop_6 items, globalization attitudes,
 demographics, loss aversion, and an immigration conjoint.
 
-1. Clean the data — build a populism index from pop_1.n
+1. Clean the data -- build a populism index from pop_1.n
    through pop_6.n, recode demographics, handle NAs
 2. Explore: descriptive stats by country, distributions
 3. Model predictors of populism (age, education,
@@ -667,18 +667,18 @@ No absolute paths."</span>
 
 <!-- WHAT THE AGENT PRODUCES -->
 <section>
-  <p class="label">R Example — What the Agent Produces</p>
+  <p class="label">R Example -- What the Agent Produces</p>
   <h2>From one prompt: a full project directory</h2>
   <ul style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Cleaning script</strong> — reads raw data, recodes, handles missingness, writes analysis-ready file</li>
-    <li class="fragment"><strong>Exploration script</strong> — distributions, missingness, sample sizes by country</li>
-    <li class="fragment"><strong>Analysis script</strong> — models, extracts coefficients, exports statistics</li>
-    <li class="fragment"><strong>Figures script</strong> — publication-ready plots, exported to PDF and PNG</li>
-    <li class="fragment"><strong>Statistics file</strong> — every number computed, not typed — your paper references it directly</li>
-    <li class="fragment"><strong>README</strong> — replication instructions</li>
+    <li class="fragment"><strong>Cleaning script</strong> -- reads raw data, recodes, handles missingness, writes analysis-ready file</li>
+    <li class="fragment"><strong>Exploration script</strong> -- distributions, missingness, sample sizes by country</li>
+    <li class="fragment"><strong>Analysis script</strong> -- models, extracts coefficients, exports statistics</li>
+    <li class="fragment"><strong>Figures script</strong> -- publication-ready plots, exported to PDF and PNG</li>
+    <li class="fragment"><strong>Statistics file</strong> -- every number computed, not typed -- your paper references it directly</li>
+    <li class="fragment"><strong>README</strong> -- replication instructions</li>
   </ul>
   <div class="callout fragment" style="margin-top: 1em;">
-    <p>Let me open the project directory and show you what’s inside each file.</p>
+    <p>Let me open the project directory and show you what's inside each file.</p>
   </div>
 </section>
 
@@ -696,7 +696,7 @@ No absolute paths."</span>
 <!-- CONTEXT FILES -->
 <section>
   <p class="label">First: Teach the Agent Your Rules</p>
-  <h2>WARP.md — persistent project context</h2>
+  <h2>WARP.md -- persistent project context</h2>
   <p>Create this file in your project root. The agent reads it at the start of every session, so you only set conventions once.</p>
   <div class="cols" style="margin-top: 1em;">
     <div>
@@ -709,7 +709,7 @@ No absolute paths."</span>
       </ul>
     </div>
     <div>
-      <h3 style="color: var(--gold-dark);">Your rules — whatever you want</h3>
+      <h3 style="color: var(--gold-dark);">Your rules -- whatever you want</h3>
       <ul>
         <li>Your preferred SE type</li>
         <li>Your preferred plot style</li>
@@ -729,11 +729,11 @@ No absolute paths."</span>
   <p class="label">What to Look For</p>
   <h2>When I open these files, check for:</h2>
   <ul style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Relative paths only</strong> — no <code>/Users/crabtree/...</code> anywhere</li>
-    <li class="fragment"><strong>Dropped rows are logged</strong> — "Raw rows: 82,034 | Clean rows: 71,847 | Dropped: 10,187"</li>
-    <li class="fragment"><strong>Statistics are computed, not typed</strong> — every number flows from code to paper</li>
-    <li class="fragment"><strong>Scripts have clear headers</strong> — purpose, inputs, outputs</li>
-    <li class="fragment"><strong>Figures match the regression table</strong> — same model, same sample, same coefficients</li>
+    <li class="fragment"><strong>Relative paths only</strong> -- why? Because <code>/Users/crabtree/Documents/...</code> only works on your machine. A coauthor, a reviewer, or future-you on a different laptop will get an error on line 1. Relative paths like <code>here::here("data", "raw", "survey.csv")</code> work everywhere.</li>
+    <li class="fragment"><strong>Dropped rows are logged</strong> -- the script prints "Raw rows: 82,034 | Clean rows: 71,847 | Dropped: 10,187" so you know exactly what happened</li>
+    <li class="fragment"><strong>Statistics are computed, not typed</strong> -- every number flows from code to paper</li>
+    <li class="fragment"><strong>Scripts have clear headers</strong> -- purpose, inputs, outputs</li>
+    <li class="fragment"><strong>Figures match the regression table</strong> -- same model, same sample, same coefficients</li>
   </ul>
   <div class="callout-gold callout fragment" style="margin-top: 1em;">
     <p>These are the things a reviewer agent checks automatically. Let me show you the code.</p>
@@ -742,30 +742,31 @@ No absolute paths."</span>
 <!-- STATISTICS.TEX PATTERN -->
 <section class="dark">
   <div class="dark-content">
-    <p class="label">The Key Pattern — Never Hardcode a Number</p>
+    <p class="label">The Key Pattern -- Never Hardcode a Number</p>
     <h2>Statistics flow from code to paper</h2>
     <div class="cols" style="gap: 30px;">
       <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">The agent computes and exports:</p>
+        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">Your R script computes and writes a file:</p>
         <pre style="font-size: 0.6em; margin: 0;">
 <span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\nObs</span>}{<span class="tex-arg">72,814</span>}
 <span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainCoef</span>}{<span class="tex-arg">0.342</span>}
 <span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainSE</span>}{<span class="tex-arg">0.012</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainP</span>}{<span class="tex-arg">0.001</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\rSquared</span>}{<span class="tex-arg">0.241</span>}</pre>
+<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainP</span>}{<span class="tex-arg">0.001</span>}</pre>
+        <p style="color: #aaa; font-size: 0.75em; margin-top: 0.8em;">Each <code>\newcommand</code> creates a macro name (like <code>\nObs</code>) and stores the computed value. These are generated by your analysis script, not typed by hand.</p>
       </div>
       <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">You write in your paper:</p>
+        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">Your LaTeX paper uses the macros:</p>
         <pre style="font-size: 0.6em; margin: 0;">
 Our sample includes <span class="tex-cmd">\nObs</span>{} respondents.
 The main effect is
 $\beta = <span class="tex-cmd">\mainCoef</span>{}$
 (SE $= <span class="tex-cmd">\mainSE</span>{}$,
 $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
+        <p style="color: #aaa; font-size: 0.75em; margin-top: 0.8em;">When you compile the paper, LaTeX replaces each macro with the number from the file. Change the data, re-run, recompile -- every number updates.</p>
       </div>
     </div>
     <div class="callout-gold callout" style="margin-top: 1.2em;">
-      <p>Re-run analysis → file updates → paper updates. Zero transcription errors. This works with LaTeX macros, CSV, JSON — whatever your workflow uses.</p>
+      <p>Not using LaTeX? Same pattern works with CSV, JSON, or any format your workflow reads. The point: numbers are computed once and referenced, never typed twice.</p>
     </div>
   </div>
 </section>
@@ -775,9 +776,9 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
   <p class="label">The Paper Trail</p>
   <h2>Documentation happens automatically</h2>
   <ul style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Session logs</strong> — every prompt, command, and output is recorded</li>
-    <li class="fragment"><strong>Model tracked</strong> — which LLM produced each result</li>
-    <li class="fragment"><strong>Git integration</strong> — commits + session logs = provenance chain</li>
+    <li class="fragment"><strong>Session logs</strong> -- every prompt you typed, every command the agent ran, every output it produced. In Warp: click the session menu (top right) to export as markdown or share a link.</li>
+    <li class="fragment"><strong>Model tracked</strong> -- each interaction records which LLM produced it (Sonnet, Opus, GPT-4o). Visible in the session log and in Warp's conversation history.</li>
+    <li class="fragment"><strong>Git integration</strong> -- the agent can commit after each step. Commits + session logs = complete provenance: who wrote what, when, and which model helped.</li>
   </ul>
   <div class="callout fragment" style="margin-top: 1em;">
     <p>Numbered scripts + computed statistics + session logs + git = a replication package that writes itself.</p>
@@ -797,18 +798,18 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
 <!-- SINGLE CONSOLIDATED FAILURE SLIDE -->
 <section>
   <p class="label">Real Failures</p>
-  <h2>Things I've seen agents do — with full confidence</h2>
+  <h2>Things I've seen agents do -- with full confidence</h2>
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; margin-top: 0.8em; font-size: 0.95em;">
     <div class="card fragment" style="border-left: 4px solid #e85555;">
       <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Fabricated a citation</h3>
-      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Cited "Smith & Jones (2019)" in the literature review. Paper doesn’t exist. DOI leads nowhere. Sounded perfectly plausible.</p>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Cited "Smith & Jones (2019)" in the literature review. Paper doesn't exist. DOI leads nowhere. Sounded perfectly plausible.</p>
     </div>
     <div class="card fragment" style="border-left: 4px solid #e85555;">
-      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> N doesn’t match</h3>
+      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> N doesn't match</h3>
       <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Abstract says N = 1,247. Results table says N = 935. Cleaning script silently dropped 312 rows. No mention anywhere.</p>
     </div>
     <div class="card fragment" style="border-left: 4px solid #e85555;">
-      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Figure doesn’t match table</h3>
+      <h3 style="font-size: 1em; margin-bottom: 0.4em;"><span class="severity-critical">🔴</span> Figure doesn't match table</h3>
       <p style="font-size: 0.85em; color: var(--text-muted); margin: 0;">Coefficient plot shows β = 0.34. Regression table says 0.21. Agent re-estimated the model with a different sample for the figure.</p>
     </div>
     <div class="card fragment" style="border-left: 4px solid #e6a817;">
@@ -825,7 +826,7 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
 <!-- PART 4: ADVERSARIAL AGENTIC CODING -->
 <!-- ============================================================ -->
 <section data-background-color="#0d1b2a" data-background-gradient="linear-gradient(135deg, #0d1b2a 0%, #1a1a1a 50%, #0a192f 100%)">
-  <p class="label" style="color: var(--gold);">Part 4 — The Core Idea</p>
+  <p class="label" style="color: var(--gold);">Part 4 -- The Core Idea</p>
   <h2 style="font-size: 2.8em; line-height: 1.2; margin-bottom: 0.6em; color: #fff;">
     <span class="ukraine-highlight">Two agents</span> are better than one
   </h2>
@@ -840,23 +841,23 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
 <!-- THE PATTERN -->
 <section>
   <p class="label">The Pattern</p>
-  <h2>Build → Review → Fix → Review</h2>
+  <h2>Build -> Review -> Fix -> Review</h2>
   <div style="display: flex; align-items: center; gap: 1.5em; margin-top: 1.2em; flex-wrap: wrap;">
     <div class="card" style="flex: 1; min-width: 200px; border-top: 4px solid var(--accent);">
       <h3 style="color: var(--accent); font-size: 1.05em; margin-bottom: 0.4em;">1. Build</h3>
       <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Invoke <code>/builder-agent</code><br>Produces .R scripts, figures, stats.tex</p>
     </div>
-    <div style="font-size: 2em; color: var(--text-muted);">→</div>
+    <div style="font-size: 2em; color: var(--text-muted);">-></div>
     <div class="card" style="flex: 1; min-width: 200px; border-top: 4px solid var(--gold-dark);">
       <h3 style="color: var(--gold-dark); font-size: 1.05em; margin-bottom: 0.4em;">2. Review</h3>
       <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Switch model, invoke <code>/reviewer-agent</code><br>Runs checks, Python verification</p>
     </div>
-    <div style="font-size: 2em; color: var(--text-muted);">→</div>
+    <div style="font-size: 2em; color: var(--text-muted);">-></div>
     <div class="card" style="flex: 1; min-width: 200px; border-top: 4px solid var(--accent);">
       <h3 style="color: var(--accent); font-size: 1.05em; margin-bottom: 0.4em;">3. Fix</h3>
       <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Builder addresses critical issues<br>Re-runs pipeline</p>
     </div>
-    <div style="font-size: 2em; color: var(--text-muted);">→</div>
+    <div style="font-size: 2em; color: var(--text-muted);">-></div>
     <div class="card" style="flex: 1; min-width: 200px; border-top: 4px solid var(--gold-dark);">
       <h3 style="color: var(--gold-dark); font-size: 1.05em; margin-bottom: 0.4em;">4. Re-review</h3>
       <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Reviewer confirms fixes<br>Produces final report</p>
@@ -903,21 +904,37 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
   <h2>What <code>/reviewer-agent</code> does</h2>
   <p>You switch to a different model, invoke the reviewer, and it:</p>
   <ul style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Runs every script from a clean session</strong> — do they all succeed?</li>
-    <li class="fragment"><strong>Checks that N matches</strong> — counts rows in the actual data, compares to reported N</li>
-    <li class="fragment"><strong>Checks figures against tables</strong> — are the coefficients the same?</li>
-    <li class="fragment"><strong>Searches for hardcoded numbers</strong> — are statistics computed or typed?</li>
-    <li class="fragment"><strong>Writes a review report</strong> — Critical / Warning / Note, with specific fixes</li>
+    <li class="fragment"><strong>Runs every script from a clean session</strong> -- do they all succeed?</li>
+    <li class="fragment"><strong>Checks that N matches</strong> -- counts rows in the actual data, compares to reported N</li>
+    <li class="fragment"><strong>Checks figures against tables</strong> -- are the coefficients the same?</li>
+    <li class="fragment"><strong>Searches for hardcoded numbers</strong> -- are statistics computed or typed?</li>
+    <li class="fragment"><strong>Writes a review report</strong> -- Critical / Warning / Note, with specific fixes</li>
   </ul>
   <div class="callout-gold callout fragment" style="margin-top: 1em;">
     <p>Let me show you what this looks like live.</p>
   </div>
 </section>
 
-<!-- LIVE DEMO SETUP -->
+<!-- LIVE DEMO -->
 <section class="dark">
-  <div class="dark-content center">
-    <p style="color: #aaa; font-size: 1.15em;">Live demo: builder produces analysis → reviewer breaks it</p>
+  <div class="dark-content">
+    <p class="label">Live Demo</p>
+    <h2>Builder produces analysis, reviewer breaks it</h2>
+    <pre style="font-size: 0.62em; margin-top: 1em;">
+<span class="p">/builder-agent</span>
+<span class="c">"I have a YouGov survey dataset at
+~/Dropbox/hatemi-mcdermott-crabtree/2025YouGov/
+with an SPSS file, a codebook PDF, and CSV exports.
+
+1. Figure out which files have the actual data
+2. Read the codebook and tell me what the study is about
+3. Explore the data -- key variables, sample size,
+   distributions, missingness
+4. Propose a research question based on what you find
+5. Model it, visualize it, export statistics
+6. Put everything in numbered .R scripts
+
+No absolute paths."</span></pre>
   </div>
 </section>
 
@@ -934,7 +951,7 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
 <!-- EXERCISE CARDS -->
 <section>
   <p class="label">Exercises</p>
-  <h2>Four exercises — pick your level</h2>
+  <h2>Four exercises -- pick your level</h2>
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; margin-top: 0.8em; font-size: 0.95em;">
     <div class="card" style="border-left: 4px solid var(--text-muted);">
       <h3 style="font-size: 1.05em; color: var(--text-muted); margin-bottom: 0.5em;">1. Just Talk to It</h3>
@@ -942,7 +959,7 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
       <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="c">"Tell me about the files in this folder."
 
 "I have survey data at data/raw/processed.csv.
-What’s in it? How many rows? What countries?"
+What's in it? How many rows? What countries?"
 
 "Put together a plan for analyzing whether
 economic insecurity predicts populist attitudes."</span></pre>
@@ -954,24 +971,23 @@ economic insecurity predicts populist attitudes."</span></pre>
 <span class="c">"Does economic insecurity predict populist
 attitudes? Use data/raw/processed.csv (~82K rows).
 • DV: populism index (pop_1.n through pop_6.n)
-• Key IVs: loss aversion (loss_1.n–loss_6.n)
+• Key IVs: loss aversion (loss_1.n-loss_6.n)
 • Controls: age, education (ed_postsec), country
 • Explore first, then model, then visualize"</span></pre>
     </div>
     <div class="card" style="border-left: 4px solid var(--gold-dark);">
       <h3 style="font-size: 1.05em; color: var(--gold-dark); margin-bottom: 0.5em;">3. Break It</h3>
-      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">Switch model, audit the builder’s work.</p>
-      <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="c">1. Review the .R scripts the builder created
-2. Click model selector → switch model</span>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">Switch model, audit the builder's work.</p>
+      <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="c">Switch to a different model, then:</span>
 
 <span class="p">/reviewer-agent</span>
 <span class="c">"Audit everything the builder just produced."</span>
 
-<span class="c">3. Read review_report.md. What did it find?</span></pre>
+<span class="c">Read review_report.md. What did it find?</span></pre>
     </div>
     <div class="card" style="border-left: 4px solid #A855F7;">
       <h3 style="font-size: 1.05em; color: #A855F7; margin-bottom: 0.5em;">4. Build Something You Can Use</h3>
-      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">Don’t read the code. <em>Use</em> it.</p>
+      <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 0.6em;">Don't read the code. <em>Use</em> it.</p>
       <pre style="font-size: 0.6em; padding: 12px; margin: 0;"><span class="c">"Build a Twitter/X feed interface for a survey
 experiment on [YOUR TOPIC].
 • 8 posts with treatment variation
@@ -983,15 +999,15 @@ experiment on [YOUR TOPIC].
     </div>
   </div>
   <div style="text-align: center; margin-top: 1em;">
+    <p style="font-size: 1em; color: var(--text-muted); margin-bottom: 0.8em;">Have your own data? Try any of these with your own project.</p>
     <p class="timer" data-minutes="14" style="font-size: 2em;">14:00</p>
-    <p style="font-size: 1em; color: var(--text-muted); margin-top: 0.8em;">Have your own data? Try any of these with your own project.</p>
   </div>
 </section>
 
 <!-- SHARE -->
 <section class="dark">
   <div class="dark-content center">
-    <h2>Share what you built — and what broke</h2>
+    <h2>Share what you built -- and what broke</h2>
     <p>Failures are the most useful thing you can share.</p>
   </div>
 </section>
@@ -1014,19 +1030,19 @@ experiment on [YOUR TOPIC].
     <div>
       <h3 style="color: var(--gold-dark);">Costs collapse ↓</h3>
       <ul style="margin-top: 0.5em;">
-        <li class="fragment"><strong>Data cleaning</strong> — parsing, merging, recoding</li>
-        <li class="fragment"><strong>Analysis</strong> — models, robustness checks, figures</li>
-        <li class="fragment"><strong>Documentation</strong> — READMEs, session logs, LaTeX</li>
-        <li class="fragment"><strong>Verification</strong> — adversarial review, stress tests</li>
+        <li class="fragment"><strong>Data cleaning</strong> -- parsing, merging, recoding</li>
+        <li class="fragment"><strong>Analysis</strong> -- models, robustness checks, figures</li>
+        <li class="fragment"><strong>Documentation</strong> -- READMEs, session logs, LaTeX</li>
+        <li class="fragment"><strong>Verification</strong> -- adversarial review, stress tests</li>
       </ul>
     </div>
     <div>
       <h3 style="color: var(--accent);">Value rises ↑</h3>
       <ul style="margin-top: 0.5em;">
-        <li class="fragment"><strong>Ideas</strong> — original questions, creative design</li>
-        <li class="fragment"><strong>Taste</strong> — knowing what's worth doing</li>
-        <li class="fragment"><strong>Fieldwork</strong> — being there, in person</li>
-        <li class="fragment"><strong>Judgment</strong> — knowing when the agent is wrong</li>
+        <li class="fragment"><strong>Ideas</strong> -- original questions, creative design</li>
+        <li class="fragment"><strong>Taste</strong> -- knowing what's worth doing</li>
+        <li class="fragment"><strong>Fieldwork</strong> -- being there, in person</li>
+        <li class="fragment"><strong>Judgment</strong> -- knowing when the agent is wrong</li>
       </ul>
     </div>
   </div>
@@ -1057,74 +1073,77 @@ experiment on [YOUR TOPIC].
   <h2>Three things</h2>
   <ol style="margin-top: 0.8em;">
     <li class="fragment"><strong>Constrain the agent.</strong> Your conventions in WARP.md. Numbered scripts. No absolute paths. Statistics computed, not typed.</li>
-    <li class="fragment"><strong>Review adversarially.</strong> A second agent — on a different model — catches what the first misses. Use Python to verify R.</li>
+    <li class="fragment"><strong>Review adversarially.</strong> A second agent -- on a different model -- catches what the first misses. Use Python to verify R.</li>
     <li class="fragment"><strong>Document by default.</strong> LaTeX macros, session logs, git commits. The paper trail writes itself.</li>
   </ol>
 </section>
 
-<!-- TEMPLATES: WHAT THEY ARE -->
-<section>
-  <p class="label">Take-Home Templates</p>
-  <h2>Two skills, ready to use</h2>
-  <div class="cols" style="margin-top: 1em;">
-    <div class="card" style="border-top: 4px solid var(--accent);">
-      <h3 style="color: var(--accent); margin-bottom: 0.5em;">Builder Skill</h3>
-      <p style="font-size: 0.9em; color: var(--text-muted); margin: 0 0 0.5em 0;"><code>skills/builder-agent/SKILL.md</code></p>
-      <ul style="font-size: 0.85em;">
-        <li>Plans numbered .R script pipeline</li>
-        <li>Reads your conventions from WARP.md</li>
-        <li>Exports computed statistics (never hardcoded)</li>
-        <li>Self-checks before finishing</li>
-      </ul>
-    </div>
-    <div class="card" style="border-top: 4px solid var(--gold-dark);">
-      <h3 style="color: var(--gold-dark); margin-bottom: 0.5em;">Reviewer Skill</h3>
-      <p style="font-size: 0.9em; color: var(--text-muted); margin: 0 0 0.5em 0;"><code>skills/reviewer-agent/SKILL.md</code></p>
-      <ul style="font-size: 0.85em;">
-        <li>Checks N matches, figures match tables</li>
-        <li>Searches for hardcoded numbers</li>
-        <li>Can re-estimate in Python independently</li>
-        <li>Produces severity-rated review report</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- TEMPLATES: HOW TO INSTALL AND USE -->
+<!-- TEMPLATES: HOW TO INSTALL AND USE (moved before exercises) -->
 <section class="dark">
   <div class="dark-content">
     <p class="label">How to Install and Invoke in Warp</p>
     <h2>Three steps</h2>
     <div class="cols" style="gap: 40px; margin-top: 1em;">
       <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">1. Copy the skill files into your project:</p>
+        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">1. Download the skill files from the <a href="https://github.com/lobsterbush/workshops-for-ukraine/tree/master/skills" target="_blank" style="color: var(--gold);">workshop repo</a> into your project:</p>
         <pre style="font-size: 0.6em; margin: 0; padding: 18px 24px;">
 my-project/
-├── <span class="file-name">.warp/skills/</span>
-│   ├── builder-agent/
-│   │   └── SKILL.md
-│   └── reviewer-agent/
-│       └── SKILL.md
-├── data/
-└── WARP.md</pre>
+|-- <span class="file-name">.warp/skills/</span>
+|   |-- builder-agent/
+|   |   `-- SKILL.md
+|   `-- reviewer-agent/
+|       `-- SKILL.md
+|-- data/
+`-- WARP.md</pre>
         <p style="color: #aaa; font-size: 0.75em; margin-top: 0.8em;">Also works: <code>.agents/skills/</code>, <code>.claude/skills/</code>, <code>.cursor/skills/</code><br>Global (all projects): <code style="color: var(--gold);">~/.warp/skills/</code></p>
       </div>
       <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">2. Type <code style="color: #fff;">/</code> in Warp’s input bar to invoke:</p>
+        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">2. Type <code style="color: #fff;">/</code> in Warp's input bar to invoke:</p>
         <pre style="font-size: 0.6em; margin: 0 0 1em 0; padding: 18px 24px;">
 <span class="p">/builder-agent</span> <span class="c">Analyze the populism
   data at data/raw/processed.csv...</span></pre>
-        <p style="color: #aaa; font-size: 0.75em; margin-bottom: 1em;">Warp auto-discovers skills and shows them in the <code>/</code> menu. You can also just describe your task — the agent finds the right skill.</p>
+        <p style="color: #aaa; font-size: 0.75em; margin-bottom: 1em;">Warp auto-discovers skills and shows them in the <code>/</code> menu. You can also just describe your task -- the agent finds the right skill.</p>
         <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">3. Click the model selector, switch model, invoke reviewer:</p>
         <pre style="font-size: 0.6em; margin: 0; padding: 18px 24px;">
-<span class="r-comment"># Model selector → GPT-4o</span>
+<span class="r-comment"># Model selector -> GPT-4o</span>
 <span class="p">/reviewer-agent</span> <span class="c">Audit everything
   the builder just produced.</span></pre>
       </div>
     </div>
     <div class="callout-gold callout" style="margin-top: 1em;">
-      <p>Warp reads the SKILL.md automatically when you invoke it. The agent follows the full procedure, conventions, and checklist — you never repeat instructions.</p>
+      <p>Warp reads the SKILL.md automatically when you invoke it. The agent follows the full procedure and checklist -- you never repeat instructions.</p>
     </div>
+  </div>
+</section>
+
+<!-- TEMPLATES: WHAT THEY ARE -->
+<section>
+  <p class="label">Downloadable Skills</p>
+  <h2>Two skills, ready to use</h2>
+  <div class="cols" style="margin-top: 1em;">
+    <div class="card" style="border-top: 4px solid var(--accent);">
+      <h3 style="color: var(--accent); margin-bottom: 0.5em;"><a href="https://github.com/lobsterbush/workshops-for-ukraine/blob/master/skills/builder-agent/SKILL.md" target="_blank" style="color: var(--accent);">Builder Skill</a></h3>
+      <ul style="font-size: 0.85em;">
+        <li>Plans numbered .R script pipeline</li>
+        <li>Reads your conventions from WARP.md</li>
+        <li>Explores data before modeling</li>
+        <li>Exports computed statistics (never hardcoded)</li>
+        <li>Self-checks before finishing</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--gold-dark);">
+      <h3 style="color: var(--gold-dark); margin-bottom: 0.5em;"><a href="https://github.com/lobsterbush/workshops-for-ukraine/blob/master/skills/reviewer-agent/SKILL.md" target="_blank" style="color: var(--gold-dark);">Reviewer Skill</a></h3>
+      <ul style="font-size: 0.85em;">
+        <li>Runs scripts from a clean session</li>
+        <li>Checks N matches, figures match tables</li>
+        <li>Searches for hardcoded numbers and absolute paths</li>
+        <li>Can re-estimate in Python independently</li>
+        <li>Produces severity-rated review report</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top: 1em;">
+    <p>Also includes a <a href="https://github.com/lobsterbush/workshops-for-ukraine/blob/master/skills/builder-agent/conventions-example.md" target="_blank" style="color: var(--accent);">conventions-example.md</a> you can customize with your own package and style preferences.</p>
   </div>
 </section>
 
@@ -1134,18 +1153,15 @@ my-project/
   <p style="margin-top: 0.8em;">
     Charles Crabtree<br>
     <span style="color: var(--text-muted);">Senior Lecturer, School of Social Sciences, Monash University<br>K-Club Professor, University College, Korea University</span><br>
-    <a href="mailto:charles.crabtree@monash.edu" style="color: var(--accent);">charles.crabtree@monash.edu</a> · <a href="https://charlescrabtree.com" target="_blank" style="color: var(--accent);">charlescrabtree.com</a>
+    <a href="mailto:charles.crabtree@monash.edu" style="color: var(--accent);">charles.crabtree@monash.edu</a> &middot; <a href="https://charlescrabtree.org" target="_blank" style="color: var(--accent);">charlescrabtree.org</a>
   </p>
   <div style="margin-top: 1.5em;">
     <p class="label" style="margin-bottom: 0.6em;">Resources</p>
     <ul style="font-size: 0.9em;">
-      <li><a href="https://warp.dev" target="_blank" style="color: var(--accent);">warp.dev</a> — Download Warp</li>
-      <li style="display: flex; align-items: center; gap: 1em;">
-        <a href="https://github.com/lobsterbush/workshops-for-ukraine" target="_blank" style="color: var(--accent);">github.com/lobsterbush/workshops-for-ukraine</a> — Slides, skill templates, examples
-        <img src="images/Active QR Code.png" alt="Workshop repo QR code" style="width: 80px; height: 80px; border-radius: 6px;">
-      </li>
-      <li><code>skills/builder-agent/SKILL.md</code> — Builder skill template</li>
-      <li><code>skills/reviewer-agent/SKILL.md</code> — Reviewer skill template</li>
+      <li><a href="https://warp.dev" target="_blank" style="color: var(--accent);">warp.dev</a> -- Download Warp</li>
+      <li><a href="https://lobsterbush.github.io/workshops-for-ukraine/" target="_blank" style="color: var(--accent);">lobsterbush.github.io/workshops-for-ukraine</a> -- Live slides</li>
+      <li><a href="https://github.com/lobsterbush/workshops-for-ukraine/blob/master/skills/builder-agent/SKILL.md" target="_blank" style="color: var(--accent);">Builder skill</a> -- download from GitHub</li>
+      <li><a href="https://github.com/lobsterbush/workshops-for-ukraine/blob/master/skills/reviewer-agent/SKILL.md" target="_blank" style="color: var(--accent);">Reviewer skill</a> -- download from GitHub</li>
     </ul>
   </div>
 </section>
