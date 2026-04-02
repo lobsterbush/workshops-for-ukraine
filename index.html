@@ -463,8 +463,7 @@
     Charles Crabtree<br>
     <span style="color: var(--text-muted);">Senior Lecturer, School of Social Sciences, Monash University<br>K-Club Professor, University College, Korea University</span>
   </p>
-  <div style="margin-top: 1.5em; display: flex; align-items: center; gap: 1.2em;">
-    <img src="images/Active QR Code.png" alt="Workshop repo QR code" style="width: 120px; height: 120px; border-radius: 8px;">
+  <div style="margin-top: 1.5em;">
     <a href="https://github.com/lobsterbush/workshops-for-ukraine" target="_blank" style="font-size: 0.85em; color: var(--accent);">github.com/lobsterbush/workshops-for-ukraine</a>
   </div>
 </section>
@@ -520,6 +519,21 @@
   </p>
 </section>
 
+<!-- WHAT IS WARP -->
+<section>
+  <p class="label">The Tool</p>
+  <h2>Warp -- the agentic development environment</h2>
+  <p>It's a terminal with an AI agent built in. The agent can read your files, run your code, see the output, and fix errors -- all in one place.</p>
+  <ul style="margin-top: 0.8em;">
+    <li class="fragment"><strong>Free to start</strong> -- 75 credits/month, no credit card</li>
+    <li class="fragment"><strong>Multi-model</strong> -- Claude, GPT, Gemini. Switch with one click.</li>
+    <li class="fragment"><strong>macOS, Windows, Linux</strong> -- <a href="https://warp.dev" target="_blank" style="color: var(--accent);">warp.dev</a></li>
+  </ul>
+  <div class="callout fragment" style="margin-top: 1em;">
+    <p>We'll use Warp today, but the patterns work with any agent that can run code on your machine.</p>
+  </div>
+</section>
+
 <!-- VIBE CODING vs AGENTIC CODING -->
 <section>
   <p class="label">Two Ways to Use AI</p>
@@ -559,9 +573,9 @@
   <h2>What we'll cover</h2>
   <ol style="margin-top: 0.8em;">
     <li class="fragment"><strong>How agents work</strong> -- from tasks to numbered .R scripts</li>
-    <li class="fragment"><strong>Inside the code</strong> -- walkthrough of real R scripts the agent writes</li>
+    <li class="fragment"><strong>Inside the code</strong> -- walkthrough of what the agent produces</li>
     <li class="fragment"><strong>Where agents fail</strong> -- silent errors, wrong assumptions</li>
-    <li class="fragment"><strong>Adversarial agentic coding</strong> -- builder + reviewer agents, Python diagnostics</li>
+    <li class="fragment"><strong>Adversarial agentic coding</strong> -- builder + reviewer agents on different models</li>
     <li class="fragment"><strong>Hands-on practice</strong> -- build, break, and fix</li>
     <li class="fragment"><strong>Implications</strong></li>
   </ol>
@@ -683,7 +697,6 @@ No absolute paths."</span>
 </section>
 
 <!-- ============================================================ -->
-<!-- ============================================================ -->
 <!-- PART 2: INSIDE THE CODE -->
 <!-- ============================================================ -->
 <section class="section-bg" data-background-image="images/code_screen.jpg" data-background-size="cover" data-background-position="center">
@@ -729,7 +742,7 @@ No absolute paths."</span>
   <p class="label">What to Look For</p>
   <h2>When I open these files, check for:</h2>
   <ul style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Relative paths only</strong> -- why? Because <code>/Users/crabtree/Documents/...</code> only works on your machine. A coauthor, a reviewer, or future-you on a different laptop will get an error on line 1. Relative paths like <code>here::here("data", "raw", "survey.csv")</code> work everywhere.</li>
+    <li class="fragment"><strong>Relative paths only</strong> -- <code>/Users/you/...</code> breaks on every other machine. Relative paths work everywhere.</li>
     <li class="fragment"><strong>Dropped rows are logged</strong> -- the script prints "Raw rows: 82,034 | Clean rows: 71,847 | Dropped: 10,187" so you know exactly what happened</li>
     <li class="fragment"><strong>Statistics are computed, not typed</strong> -- every number flows from code to paper</li>
     <li class="fragment"><strong>Scripts have clear headers</strong> -- purpose, inputs, outputs</li>
@@ -847,17 +860,17 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
       <h3 style="color: var(--accent); font-size: 1.05em; margin-bottom: 0.4em;">1. Build</h3>
       <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Invoke <code>/builder-agent</code><br>Produces .R scripts, figures, stats.tex</p>
     </div>
-    <div style="font-size: 2em; color: var(--text-muted);">-></div>
+    <div style="font-size: 2em; color: var(--text-muted);">&rarr;</div>
     <div class="card" style="flex: 1; min-width: 200px; border-top: 4px solid var(--gold-dark);">
       <h3 style="color: var(--gold-dark); font-size: 1.05em; margin-bottom: 0.4em;">2. Review</h3>
-      <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Switch model, invoke <code>/reviewer-agent</code><br>Runs checks, Python verification</p>
+      <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Switch model, invoke <code>/reviewer-agent</code><br>Runs checks, verifies numbers</p>
     </div>
-    <div style="font-size: 2em; color: var(--text-muted);">-></div>
+    <div style="font-size: 2em; color: var(--text-muted);">&rarr;</div>
     <div class="card" style="flex: 1; min-width: 200px; border-top: 4px solid var(--accent);">
       <h3 style="color: var(--accent); font-size: 1.05em; margin-bottom: 0.4em;">3. Fix</h3>
       <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Builder addresses critical issues<br>Re-runs pipeline</p>
     </div>
-    <div style="font-size: 2em; color: var(--text-muted);">-></div>
+    <div style="font-size: 2em; color: var(--text-muted);">&rarr;</div>
     <div class="card" style="flex: 1; min-width: 200px; border-top: 4px solid var(--gold-dark);">
       <h3 style="color: var(--gold-dark); font-size: 1.05em; margin-bottom: 0.4em;">4. Re-review</h3>
       <p style="font-size: 0.9em; color: var(--text-muted); margin: 0;">Reviewer confirms fixes<br>Produces final report</p>
@@ -922,9 +935,9 @@ $p = <span class="tex-cmd">\mainP</span>{}$).</pre>
     <h2>Builder produces analysis, reviewer breaks it</h2>
     <pre style="font-size: 0.62em; margin-top: 1em;">
 <span class="p">/builder-agent</span>
-<span class="c">"I have a YouGov survey dataset at
-~/Dropbox/hatemi-mcdermott-crabtree/2025YouGov/
+<span class="c">"I have a YouGov survey dataset in this folder
 with an SPSS file, a codebook PDF, and CSV exports.
+[opened in ~/Dropbox/hatemi-mcdermott-crabtree/2025YouGov/]
 
 1. Figure out which files have the actual data
 2. Read the codebook and tell me what the study is about
@@ -1015,6 +1028,19 @@ experiment on [YOUR TOPIC].
 <!-- ============================================================ -->
 <!-- PART 6: IMPLICATIONS -->
 <!-- ============================================================ -->
+
+<!-- ============================================================ -->
+<!-- SUMMARY -->
+<!-- ============================================================ -->
+<section>
+  <p class="label">Summary</p>
+  <h2>Three things</h2>
+  <ol style="margin-top: 0.8em;">
+    <li class="fragment"><strong>Constrain the agent.</strong> Your conventions in WARP.md. Numbered scripts. No absolute paths. Statistics computed, not typed.</li>
+    <li class="fragment"><strong>Review adversarially.</strong> A second agent -- on a different model -- catches what the first misses.</li>
+    <li class="fragment"><strong>Document by default.</strong> Session logs, git commits, computed statistics. The paper trail writes itself.</li>
+  </ol>
+</section>
 <section class="section-bg" data-background-image="images/horizon.jpg" data-background-size="cover" data-background-position="center">
   <div class="section-content">
     <p class="label">Part 6</p>
@@ -1065,20 +1091,7 @@ experiment on [YOUR TOPIC].
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SUMMARY -->
-<!-- ============================================================ -->
-<section>
-  <p class="label">Summary</p>
-  <h2>Three things</h2>
-  <ol style="margin-top: 0.8em;">
-    <li class="fragment"><strong>Constrain the agent.</strong> Your conventions in WARP.md. Numbered scripts. No absolute paths. Statistics computed, not typed.</li>
-    <li class="fragment"><strong>Review adversarially.</strong> A second agent -- on a different model -- catches what the first misses. Use Python to verify R.</li>
-    <li class="fragment"><strong>Document by default.</strong> LaTeX macros, session logs, git commits. The paper trail writes itself.</li>
-  </ol>
-</section>
-
-<!-- TEMPLATES: HOW TO INSTALL AND USE (moved before exercises) -->
+<!-- TEMPLATES: HOW TO INSTALL AND USE -->
 <section class="dark">
   <div class="dark-content">
     <p class="label">How to Install and Invoke in Warp</p>
@@ -1137,7 +1150,7 @@ my-project/
         <li>Runs scripts from a clean session</li>
         <li>Checks N matches, figures match tables</li>
         <li>Searches for hardcoded numbers and absolute paths</li>
-        <li>Can re-estimate in Python independently</li>
+        <li>Can re-estimate independently in another language</li>
         <li>Produces severity-rated review report</li>
       </ul>
     </div>
