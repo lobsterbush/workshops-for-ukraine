@@ -744,42 +744,54 @@ numbered .R scripts."</span>
     <p>These are the things a reviewer agent checks automatically. Let me show you the code.</p>
   </div>
 </section>
-<!-- STATISTICS PATTERN: R CODE -->
+<!-- STATISTICS PATTERN: THREE-PANEL FLOW -->
 <section class="dark">
   <div class="dark-content">
     <p class="label">The Key Pattern &mdash; Never Hardcode a Number</p>
-    <h2>How it works in R</h2>
-    <div class="cols" style="gap: 30px;">
+    <h2>Model object &rarr; file on disk &rarr; paper</h2>
+    <div style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0.8em; align-items: start; margin-top: 1em;">
       <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">In your analysis script, after fitting a model:</p>
-        <pre style="font-size: 0.55em; margin: 0;">
-<span class="r-comment"># Write statistics to a file the paper can read</span>
+        <p style="color: var(--gold); font-size: 0.8em; margin-bottom: 0.4em;">1. Your model lives in R's memory:</p>
+        <pre style="font-size: 0.5em; margin: 0; padding: 14px;">
+m1 <span class="r-assign">&lt;-</span> <span class="r-func">lm</span>(pop_index ~ age + education
+        + globalization, data <span class="r-assign">=</span> df)
+
+<span class="r-comment"># R knows everything about this model:</span>
+<span class="r-func">nobs</span>(m1)                    <span class="r-comment"># 72814</span>
+<span class="r-func">coef</span>(m1)[<span class="r-string">"globalization"</span>]  <span class="r-comment"># 0.34182</span>
+m1$std.error[<span class="r-string">"globalization"</span>] <span class="r-comment"># 0.01193</span></pre>
+      </div>
+      <div style="font-size: 1.8em; color: var(--gold); align-self: center;">&rarr;</div>
+      <div>
+        <p style="color: var(--gold); font-size: 0.8em; margin-bottom: 0.4em;">2. R extracts numbers and writes a file:</p>
+        <pre style="font-size: 0.5em; margin: 0; padding: 14px;">
 <span class="r-func">cat</span>(
   <span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\nObs}{%s}\n"</span>,
     <span class="r-func">format</span>(<span class="r-func">nobs</span>(m1), big.mark <span class="r-assign">=</span> <span class="r-string">","</span>)),
   <span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\mainCoef}{%.3f}\n"</span>,
     <span class="r-func">coef</span>(m1)[<span class="r-string">"globalization"</span>]),
-  <span class="r-func">sprintf</span>(<span class="r-string">"\\newcommand{\\mainSE}{%.3f}\n"</span>,
-    m1$std.error[<span class="r-string">"globalization"</span>]),
-  file <span class="r-assign">=</span> <span class="r-func">here</span>(<span class="r-string">"output"</span>, <span class="r-string">"statistics.tex"</span>)
-)</pre>
+  file <span class="r-assign">=</span> <span class="r-string">"output/statistics.tex"</span>
+)
+<span class="r-comment"># sprintf formats the number</span>
+<span class="r-comment"># cat writes it to the file</span></pre>
       </div>
+      <div style="font-size: 1.8em; color: var(--gold); align-self: center;">&rarr;</div>
       <div>
-        <p style="color: var(--gold); font-size: 0.85em; margin-bottom: 0.5em;">This produces a file your paper reads:</p>
-        <pre style="font-size: 0.55em; margin: 0;">
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\nObs</span>}{<span class="tex-arg">72,814</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainCoef</span>}{<span class="tex-arg">0.342</span>}
-<span class="tex-cmd">\newcommand</span>{<span class="tex-cmd">\mainSE</span>}{<span class="tex-arg">0.012</span>}</pre>
-        <p style="color: var(--gold); font-size: 0.85em; margin-top: 1em; margin-bottom: 0.5em;">In your paper, you write:</p>
-        <pre style="font-size: 0.55em; margin: 0;">
-Our sample includes <span class="tex-cmd">\nObs</span>{} respondents.
-The main effect is $\beta = <span class="tex-cmd">\mainCoef</span>{}$
-(SE $= <span class="tex-cmd">\mainSE</span>{}$).</pre>
-        <p style="color: #aaa; font-size: 0.75em; margin-top: 0.8em;">Re-run the R script, recompile &mdash; every number in the paper updates automatically.</p>
+        <p style="color: var(--gold); font-size: 0.8em; margin-bottom: 0.4em;">3. Your paper reads the file:</p>
+        <pre style="font-size: 0.5em; margin: 0 0 0.8em 0; padding: 14px;">
+<span class="r-comment">% In your .tex preamble:</span>
+<span class="tex-cmd">\input</span>{output/statistics.tex}
+
+<span class="r-comment">% In your text:</span>
+Our sample includes
+<span class="tex-cmd">\nObs</span>{} respondents.
+The main effect is
+$\beta = <span class="tex-cmd">\mainCoef</span>{}$.</pre>
+        <p style="color: #aaa; font-size: 0.7em;">LaTeX replaces <code>\nObs</code> with <code>72,814</code> and <code>\mainCoef</code> with <code>0.342</code> when you compile.</p>
       </div>
     </div>
-    <div class="callout-gold callout" style="margin-top: 1em;">
-      <p>Not using LaTeX? Same idea works with CSV, JSON, or any format. The point: numbers are computed once and referenced, never typed twice.</p>
+    <div class="callout-gold callout" style="margin-top: 0.8em;">
+      <p>Change the data, re-run the R script, recompile the paper &mdash; every number updates. No manual transcription, ever. Not using LaTeX? Same pattern works with CSV or JSON.</p>
     </div>
   </div>
 </section>
