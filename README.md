@@ -4,7 +4,7 @@ Workshop materials for a 75–90 minute session on adversarial agentic coding fo
 
 ## Authors
 
-Charles Crabtree, Senior Lecturer, School of Social Sciences, Monash University and K-Club Professor, University College, Korea University.
+Charles Crabtree, Associate Professor, School of Social Sciences, Monash University and Professor, University College, Korea University.
 
 ## Overview
 
